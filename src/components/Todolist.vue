@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="header">
-        <p></p>
-    </div>
+    <Header/>
     <div class="addtodolist">
         <input class="addtext" type="text" placeholder="입력해주세요" v-model="text" @keyup.enter="AddTodo">
         <button @click="AddTodo">등록</button>
@@ -22,12 +20,18 @@
             <button @click="deletes(index)">삭제</button>
         </div>
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
+import Header from '../views/Header.vue'
+import Footer from '../views/Footer.vue'
+
 export default {
     components: {
+        Header,
+        Footer
     },
     data() {
         return{

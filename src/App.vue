@@ -26,7 +26,8 @@ export default {
   .addtodolist{
         display: flex;
         justify-content: space-between;
-        margin-top: 150px;
+        align-items: center;
+        margin-top: 120px;
         padding: 4px 0px;
         width: 250px;
         height: 25px;
@@ -37,13 +38,13 @@ export default {
     }
     .addtext{
         border:0 solid black;
-        padding: 12px 13px;
+        padding: 8px 13px;
     }
     .list {
         margin: 8px 0px;
         margin-left: 4px;
         display: flex;
-        
+
         justify-content: space-between;
     }
     .list input, .list span {
