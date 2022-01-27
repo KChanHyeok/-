@@ -11,7 +11,9 @@
 
     <div class="boxlist">
         <div class="list" v-for="(todos, index) in todo" :key="todos.id">
+            <div>
             <input type="checkbox" @change="checkedbox(index)">
+            </div>
             <span
                 :class="todo[index].checked ? 'text-muted' : '' "
                 :style="todo[index].checked ? 'text-decoration:line-through' : '' ">
@@ -66,36 +68,5 @@ export default {
 </script>
 
 <style>
-    .addtodolist{
-        display: flex;
-        margin-top: 150px;
-        margin-left: 400px;
-        padding: 2px 0px;
-        width: 224px;
-        height: 25px;
-        border: 1px solid black;
-    }
-    .addtext{
-        border:0 solid black
-    }
-    .list {
-        margin: 5px 0px;
-    }
-    .list input, .list span {
-        padding-left: 5px;
-    }
-    .list button {
-        margin-right: 5px;
-        float: right;
-    }
-    .boxlist{
-        margin-top: 10px;
-        margin-left: 388px;
-        width: 250px;
-        border: 2px solid black;
-    }
-    .clean {
-        margin-left: 195px;
-        margin-top: 10px;
-    }
+    
 </style>

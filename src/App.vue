@@ -16,12 +16,48 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  *{
+    margin: 0;
+    }
+    #app{
+      display: flex;
+      justify-content: center;
+    }
+  .addtodolist{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 150px;
+        padding: 4px 0px;
+        width: 250px;
+        height: 25px;
+        border: 1px solid black;
+    }
+    .addtodolist button{
+      margin-right: 5px;
+    }
+    .addtext{
+        border:0 solid black;
+        padding: 12px 13px;
+    }
+    .list {
+        margin: 8px 0px;
+        margin-left: 4px;
+        display: flex;
+        
+        justify-content: space-between;
+    }
+    .list input, .list span {
+        padding-left: 5px;
+    }
+    .list button {
+        margin-right: 5px;
+    }
+    .boxlist{
+        margin-top: 10px;
+        width: 250px;
+        border: 2px solid black;
+    }
+    .clean {
+        margin-top: 10px;
+    }
 </style>
