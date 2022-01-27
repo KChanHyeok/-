@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hr>
+      <button></button>
   </div>
 </template>
 
@@ -11,9 +11,5 @@ export default {
 </script>
 
 <style>
-hr{
-    height: 10px;
-    border: 0;
-    box-shadow: 0 10px 10px -10px #bbb inset;
-}
+
 </style>

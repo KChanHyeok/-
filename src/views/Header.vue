@@ -1,14 +1,17 @@
 <template>
-  <div>
-      <h1>{{now}}</h1>
+  <div class="timer">
+      <h3>{{now}}</h3>
   </div>
 </template>
 
 <script>
+let today = new Date()
+let weekday = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+
 export default {
     data() {
         return {
-            now: "00/00"
+            now: today.getMonth()+1 + "/" + today.getDate() +" " + weekday[today.getDay()-1]
         }
     }
 }
