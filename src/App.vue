@@ -66,7 +66,6 @@ export default {
     .timer {
       float: right;
     }
-
     .main_div {
       width: 255px;
     }

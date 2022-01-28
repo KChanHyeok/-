@@ -5,15 +5,12 @@
     </div>
     <div class="addtodolist">
         <input class="addtext" type="text" placeholder="입력해주세요" v-model="text" @keyup.enter="AddTodo">
-        <button @click="AddTodo">등록</button>
+        <dButton @click="AddTodo">입력</dButton>
     </div>
 
     <div class="btn">
-        <button class="clean" @click="allDeletes">전체삭제</button>
-        <select @change="selectChange">
-            <option value="최신순">최신순</option>
-            <option value="오레된순">오레된순</option>
-        </select>
+        <dButton class="clean" @click="allDeletes">전체삭제</dButton>
+        <dSelect @change="selectChange"/>
     </div>
 
     <div class="boxlist">
@@ -29,28 +26,37 @@
             </span>
 
             <div>
-                <button @click="deletes(index)">삭제</button>
-                <p class="record"></p>
+                <dButton @click="deletes(index)">삭제</dButton>
+                <p class="record">{{todos.dayRecord}}</p>
             </div>
         </div>
     </div>
   </div>
 </template>
-
 <script>
-let record = new Date()
+
+import dButton from '../components/Dbutton.vue'
+import dSelect from '../components/Dselect.vue'
+
+const moment  = require('moment');
+const today = moment().format('MM-DD')
 
 export default {
-data() {
+
+    components:{
+        dButton,
+        dSelect
+    },
+    data() {
         return{
-            dayRecord: [record.getMonth()+1 +"/"+record.getDate() + "/"+record.getSeconds()],
+            dayRecord:[],
+            result:'',
             countcheck: 0,
             text:'',
             now:'',
-            todo:[
-                {id:1, checked:false, text:"아침에 조깅하기"},
-                {id:2, checked:false, text:"저녁식사 요거트로 먹기"}
-            ]
+            todos:[],
+            todo: JSON.parse(localStorage.getItem('todos')) || 'todo',
+            record: today
         }
     },
     methods: {
@@ -59,13 +65,16 @@ data() {
             this.todo.push({
                 id:Math.random(),
                 checked:false,
-                text: this.text
+                text: this.text,
+                dayRecord: today
             })
             this.text=''
+            localStorage.setItem('todos',JSON.stringify(this.todo))
         }
         },
         toggleCheckbox(index) {
             this.todo[index].checked = !this.todo[index].checked
+            localStorage.setItem('todos',JSON.stringify(this.todo))
             if(!this.todo[index].checked){
                 this.countcheck--
             }else{
@@ -74,6 +83,7 @@ data() {
         },
         deletes(index){
            this.todo.splice(index, 1)
+           localStorage.setItem('todos',JSON.stringify(this.todo))
            if(this.todo.length<0){
             this.countcheck--
            }else if(this.countcheck!==0){
@@ -82,14 +92,15 @@ data() {
         },
         allDeletes(){
             this.todo.splice(0)
+            localStorage.setItem('todos',JSON.stringify(this.todo))
             this.countcheck=0
         },
         selectChange(e){
             console.log(e.target.value)
         }
     },
-    computed: {
-       
+    beforeMount(){
+        localStorage.setItem('todos',JSON.stringify(this.todo)) 
     }
 }
 </script>
