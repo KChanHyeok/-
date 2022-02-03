@@ -55,7 +55,7 @@ export default {
             text:'',
             now:'',
             todos:[],
-            todo: JSON.parse(localStorage.getItem('todos')) || 'todo',
+            todo: [],
             record: today
         }
     },
@@ -100,7 +100,8 @@ export default {
         }
     },
     beforeMount(){
-        localStorage.setItem('todos',JSON.stringify(this.todo)) 
+        this.todo=JSON.parse(localStorage.getItem('todos')) || [] 
+        localStorage.setItem('todos',JSON.stringify(this.todo))
     }
 }
 </script>
