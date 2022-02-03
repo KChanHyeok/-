@@ -3,10 +3,10 @@
       <div class="count">
         <h1>{{countcheck}}/{{todo.length}}</h1>
     </div>
-    <div class="addtodolist">
+    <form class="addtodolist">
         <input class="addtext" type="text" placeholder="입력해주세요" v-model="text" @keyup.enter="AddTodo">
         <dButton @click="AddTodo">입력</dButton>
-    </div>
+    </form>
 
     <div class="btn">
         <dButton class="clean" @click="allDeletes">전체삭제</dButton>
@@ -16,7 +16,7 @@
     <div class="boxlist">
         <div class="list" v-for="(todos, index) in todo" :key="todos.id">
             <div>
-                <input type="checkbox" @change="toggleCheckbox(index)">
+                <input type="checkbox" @change="toggleCheckbox(index)" :checked="todo[index].checked">
             </div>
 
             <span
@@ -39,7 +39,7 @@ import dButton from '../components/Dbutton.vue'
 import dSelect from '../components/Dselect.vue'
 
 const moment  = require('moment');
-const today = moment().format('MM-DD')
+const today = moment().format('MM-DD-hh-mm-ss')
 
 export default {
 
@@ -56,7 +56,8 @@ export default {
             now:'',
             todos:[],
             todo: [],
-            record: today
+            record: today,
+            test: []
         }
     },
     methods: {
@@ -75,32 +76,51 @@ export default {
         toggleCheckbox(index) {
             this.todo[index].checked = !this.todo[index].checked
             localStorage.setItem('todos',JSON.stringify(this.todo))
-            if(!this.todo[index].checked){
-                this.countcheck--
-            }else{
-                this.countcheck++
-            }
+                if(!this.todo[index].checked){
+                    this.countcheck--
+                    localStorage.setItem('checkcount',JSON.stringify(this.countcheck))
+                }else{
+                    this.countcheck++
+                    localStorage.setItem('checkcount',JSON.stringify(this.countcheck))
+                }
         },
         deletes(index){
            this.todo.splice(index, 1)
            localStorage.setItem('todos',JSON.stringify(this.todo))
-           if(this.todo.length<0){
-            this.countcheck--
-           }else if(this.countcheck!==0){
-            this.countcheck--
-           }
+            if(this.todo.length<0){
+                this.countcheck--
+                localStorage.setItem('checkcount',JSON.stringify(this.countcheck))
+            }else if(this.countcheck!==0){
+                this.countcheck--
+                localStorage.setItem('checkcount',JSON.stringify(this.countcheck))
+            }
         },
         allDeletes(){
             this.todo.splice(0)
             localStorage.setItem('todos',JSON.stringify(this.todo))
             this.countcheck=0
+            localStorage.setItem('checkcount',JSON.stringify(this.countcheck))
         },
         selectChange(e){
-            console.log(e.target.value)
+        console.log(e.target.value)
+        if(e.target.value==='최신순'){
+            localStorage.setItem('sort',JSON.stringify(e.target.value))
+            this.todo.sort(function(a,b){
+                return a.dayRecord > b.dayRecord ? -1 : a.dayRecord < b.dayRecord ? 1 : 0;
+            })
+            localStorage.setItem('todos',JSON.stringify(this.todo))
+        }else{
+            localStorage.setItem('sort',JSON.stringify(e.target.value))
+            this.todo.sort(function(a,b){
+                return a.dayRecord < b.dayRecord ? -1 : a.dayRecord > b.dayRecord ? 1 : 0;
+        })
+            localStorage.setItem('todos',JSON.stringify(this.todo))
+        }
         }
     },
     beforeMount(){
         this.todo=JSON.parse(localStorage.getItem('todos')) || [] 
+        this.countcheck=JSON.parse(localStorage.getItem('checkcount')) || 0
         localStorage.setItem('todos',JSON.stringify(this.todo))
     }
 }
