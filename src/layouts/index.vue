@@ -4,7 +4,8 @@
         <h1>{{countcheck}} / {{todo.length}}</h1>
     </div>
     <form class="addtodolist">
-        <input class="addtext" type="text" placeholder="입력해주세요" v-model="text" @keyup.enter="AddTodo">
+        <!-- <input class="addtext" type="text" placeholder="입력해주세요" v-model="text" @keyup.enter="AddTodo"> -->
+        <dInput v-model="text" />
         <dButton @click="AddTodo">입력</dButton>
     </form>
 
@@ -37,6 +38,7 @@
 
 import dButton from '../components/Dbutton.vue'
 import dSelect from '../components/Dselect.vue'
+import dInput from '../components/Dinput.vue'
 
 const moment  = require('moment');
 const today = moment().format('MM-DD-hh-mm-ss')
@@ -44,6 +46,7 @@ const today = moment().format('MM-DD-hh-mm-ss')
 export default {
 
     components:{
+        dInput,
         dButton,
         dSelect
     },
@@ -54,23 +57,17 @@ export default {
             countcheck: 0,
             text:'',
             now:'',
-            todos:[],
-            todo: [],
+            todo:[],
             record: today,
             test: []
         }
     },
     methods: {
         AddTodo() {
-            if(this.text) {
-            this.todo.push ({
-                id:Math.random (),
-                checked:false,
-                text: this.text,
-                dayRecord: today
-            })
-                this.text=''
-                localStorage.setItem('todos', JSON.stringify(this.todo)) //list 1개 생성할때 마다 저장
+            if(this.text){
+            this.$store.commit('ADD_TODO',this.text)
+            console.log(this.text)
+            this.text=''
             }
         },
         toggleCheckbox(index) {  // checkbox 체크박스 클릭 인덱스 
@@ -85,12 +82,14 @@ export default {
                 }
         },
         deletes(index) {  // 삭제 버튼 클릭 인덱스 
-            if (this.countcheck>0 && this.todo[index].checked){ //체크카운트가 0이 아닌이상 제거시 같이 감소 
-                this.countcheck--
-                localStorage.setItem('checkcount', JSON.stringify(this.countcheck))  // 변경된 체크 카운트 값 저장
-            }
-           this.todo.splice(index, 1)  // 클릭한 인덱스 배열 삭제
-           localStorage.setItem('todos', JSON.stringify(this.todo))  // 변경된 배열 저장
+
+        this.$store.commit('DELETE',index)
+        //    this.todo.splice(index, 1)  // 클릭한 인덱스 배열 삭제
+            // if (this.countcheck>0 && this.todo[index].checked){ //체크카운트가 0이 아닌이상 제거시 같이 감소 
+            //     this.countcheck--
+            // localStorage.setItem('checkcount', JSON.stringify(this.countcheck))  // 변경된 체크 카운트 값 저장
+            // }
+        //    localStorage.setItem('todos', JSON.stringify(this.todo))  // 변경된 배열 저장
         },
         allDeletes() {   //전체 삭제 
             this.todo.splice(0)  // list 전체 삭제

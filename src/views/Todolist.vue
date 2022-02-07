@@ -8,9 +8,9 @@
 
 <script>
 
-import Header from '../views/Header.vue'
-import Footer from '../views/Footer.vue'
-import Index from '../views/index.vue'
+import Header from '../layouts/Header.vue'
+import Footer from '../layouts/Footer.vue'
+import Index from '../layouts/index.vue'
 
 
 export default {
