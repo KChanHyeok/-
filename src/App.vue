@@ -23,6 +23,12 @@ export default {
       display: flex;
       justify-content: center;
     }
+    #edit {
+      font-size: 8px;
+      text-decoration : none;
+      color: black;
+      
+    }
   .addtodolist{
         display: flex;
         justify-content: space-between;
@@ -54,7 +60,13 @@ export default {
     }
     .list button {
        margin-right: 5px;
+      float: left;
     }
+    .list p {
+      margin-right: 5px;
+      float: left;
+    }
+
     .boxlist{
         margin-top: 10px;
         width: 250px;
@@ -80,8 +92,8 @@ export default {
     .btn {
       margin-top: 10px;
       display: flex;
-      justify-content: space-between;
-      flex-direction: row-reverse;
+      flex-flow: row;
       justify-items: center;
     }
+    
 </style>
