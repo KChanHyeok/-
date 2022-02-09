@@ -1,6 +1,6 @@
 <template>
   <div> 
-    <Header/>
+    
     <div class="count"> 
         <h1>{{ checkcount }} / {{ todo.length }}</h1>
     </div>
@@ -8,12 +8,12 @@
         <!-- <d-input v-model="text"></d-input> -->
     <!-- </form> -->
     <div class="btn">
-        <d-button @click="goAddTodo">추가</d-button>
-        <d-button @click="gofinished">내가완료한 리스트</d-button>
-        <div>
+      <d-button @click="goAddTodo">추가</d-button>
+      <d-button @click="gofinished">내가완료한 리스트</d-button>
+      <div>
         <d-button @click="deletesAll">전체삭제</d-button>
         <d-select @change="selectChange"></d-select>
-        </div>
+      </div>
     </div>
     <div class="boxlist">
         <div class="list" v-for="(todos, index) in todo" :key="todos.id">
@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-  <Footer/>
+  
   </div>
 </template>
 <script>
@@ -42,8 +42,6 @@
 import DButton from '@/components/Dbutton.vue'
 import DSelect from '@/components/Dselect.vue'
 // import DInput from '@/components/Dinput.vue'
-import Footer from '@/layouts/Footer.vue'
-import Header from '@/layouts/Header.vue'
 import {mapGetters} from 'vuex'
 
 
@@ -53,8 +51,7 @@ export default {
       // DInput,
       DButton,
       DSelect,
-      Footer,
-      Header
+      
   },
   data () {
     return {
