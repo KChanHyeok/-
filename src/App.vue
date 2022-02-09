@@ -1,18 +1,13 @@
 <template>
   <div id="app">
-    <todolist/>
+    <router-view></router-view>
   </div>
 </template>
-
 <script>
-import todolist from './views/Todolist.vue'
 
 export default {
   name: 'App',
-  components: {
-    todolist
   }
-}
 </script>
 
 <style>
@@ -59,7 +54,7 @@ export default {
         padding-left: 5px;
     }
     .list button {
-       margin-right: 5px;
+      margin-right: 5px;
       float: left;
     }
     .list p {
