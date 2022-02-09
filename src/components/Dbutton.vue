@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name:'DButton',
   methods:{
     onclick(e){
       this.$emit('click', e)

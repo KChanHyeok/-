@@ -4,7 +4,13 @@
 
 <script>
 export default {
-    props: ['value'],
+  name:'DInput',
+    props: {
+      value:{
+        type: String,
+        default: ''
+      }
+    },
     methods:{
       updateInput(e){
           this.$emit('input', e.target.value)

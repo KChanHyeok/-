@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name:'DSelect',
   data(){
     return{
       sorted:''
